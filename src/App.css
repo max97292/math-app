@@ -111,4 +111,7 @@ body {
     margin-right: 0;
     margin-bottom: 25px;
   }
+  .total {
+    font-size: 70px;
+  }
 }
