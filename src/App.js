@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import MultiBackend from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 import './App.css';
 
 export default function App() {
@@ -14,8 +15,12 @@ export default function App() {
     if (spot === 'operator') setOperator(item.text);
   }
 
+  function financial(x) {
+    return Number.parseFloat(x).toFixed(2);
+  }
+
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <div className='app'>
         {/* math card */}
         <div className='math-card'>
@@ -39,7 +44,7 @@ export default function App() {
           />
           <div className='total'>
             {isFinite(eval(`${number1}${operator}${number2}`))
-              ? eval(`${number1}${operator}${number2}`)
+              ? financial(eval(`${number1}${operator}${number2}`))
               : '∞'}
           </div>
         </div>
